@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
+const expressjwt = require('express-jwt');
 
 const app = express();
 const PORT = process.env.PORT || 8888;
@@ -14,6 +15,23 @@ const users = [
 
 app.use(bodyParser.json());
 app.use(cors());
+
+// this check should be more thorough in production
+const jwtCheck = expressjwt({
+  secret: "mysupersecretkey"
+});
+
+app.get('/resource', (req, res) => {
+  res
+  .status(200)
+  .send('Public resource, you can see this');
+});
+
+app.get('/secret', jwtCheck, (req, res) => {
+  res
+  .status(200)
+  .send('Secret resource, you should be logged in to see this');
+});
 
 app.post('/login', (req, res) => {
   //check if request formatted correctly
