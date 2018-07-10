@@ -1,3 +1,5 @@
+This project is a tutorial followed from egghead.io for learning JWT Authentication with node
+
 in terminal
 `export PORT=3000`
 

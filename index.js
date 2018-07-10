@@ -27,6 +27,7 @@ app.get('/resource', (req, res) => {
   .send('Public resource, you can see this');
 });
 
+// api with secure endpoint
 app.get('/secret', jwtCheck, (req, res) => {
   res
   .status(200)
